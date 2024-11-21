@@ -1,0 +1,27 @@
+import java.util.Scanner;
+public class GuessingGame
+{
+    public static void main(String[] args)
+    {
+        int rand= (int)(Math.random()*101);
+        Scanner input=new Scanner(System.in);
+        System.out.print("Enter your guess: ");
+        int num=input.nextInt();
+        int i=0;
+        while(rand!=num){
+            if(num<rand){
+                System.out.println("Too low");
+                System.out.print("Enter your guess: ");
+                num=input.nextInt();
+            }
+            else if(num>rand){
+                System.out.println("Too high");
+                System.out.print("Enter your guess: ");
+                num=input.nextInt();
+            }
+            i+=1;
+        }
+        i=i+1;
+        System.out.println("You got it! It took you "+i+" guesses.");
+    }
+}
