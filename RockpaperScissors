@@ -1,0 +1,53 @@
+import java.util.Scanner;
+public class RockPaperScissor
+{
+    public static void main(String[] args)
+    {
+        Scanner input=new Scanner(System.in);
+        System.out.print("Rock (0), Paper(1), Scissors (2): ");
+        int num= input.nextInt();
+        String pick;
+        if(num==0){
+            pick="rock";
+        }
+        else if(num==1){
+            pick="paper";
+        }
+        else{
+            pick="scissors";
+        }
+        int comp= (int) (Math.random()*3);
+        String coPick;
+        if(comp==0){
+            coPick="rock";
+        }
+        else if(comp==1){
+            coPick="paper";
+        }
+        else{
+            coPick="scissors";
+        }
+        System.out.println("You played "+pick+". The computer played "+coPick);
+        if((pick==coPick)){
+            System.out.println("It is a draw!");
+        }
+        if((num==0)&&(comp==1)){
+            System.out.println("Paper beats rock, you lose!");
+        }
+        if((num==0)&&(comp==2)){
+            System.out.println("Rock beats scissors, you win!");
+        }
+        if((num==1)&&(comp==0)){
+            System.out.println("Paper beats rock, you win!");
+        }
+        if((num==1)&&(comp==2)){
+            System.out.println("Scissors beats paper, you lose!");
+        }
+        if((num==2)&&(comp==0)){
+            System.out.println("Rock beats scissors, you lose!");
+        }
+        if((num==2)&&(comp==1)){
+            System.out.println("Scissors beats paper, you win!");
+        }
+    }
+}
