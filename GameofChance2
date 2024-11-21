@@ -1,0 +1,147 @@
+import java.util.Scanner;
+public class GameOfChance2
+{
+    public static void main(String[] args)
+    {
+        int cRoll= (int)(Math.random()*6)+1;
+        int cCoin= (int)(Math.random()*2);
+        int cSpin= (int)(Math.random()*4);
+        System.out.println("*****WELCOME*****");
+        System.out.println("You have $0.0 in your Bank");
+        
+        boolean i=true;
+        int bet=0;
+        double balance=0.0;
+        boolean wage=false;
+    
+        while(i){
+            Scanner input= new Scanner(System.in);
+            System.out.println("Please choose the following options: ");
+            System.out.println("(1) Deposit money in bank.\n(2) Play the game!\n(3) Quit the game.");
+            int Choice=input.nextInt();
+        
+            if(Choice==1){
+                System.out.println("How much would you like to deposit?");
+                double ui=input.nextDouble();
+                balance += ui;
+                System.out.println("You have $"+balance+" in your bank");
+            }
+        
+            else if(Choice==2){
+                System.out.println("How much would you like to bet?");
+                bet=input.nextInt();
+                
+                while(!wage){
+                    if(bet>balance){
+                    System.out.println("Please enter an amount less than $"+balance);
+                    bet=input.nextInt();
+                }
+                    else if(bet<0){
+                        System.out.println("Please enter a positive amount");
+                        bet=input.nextInt();
+                    }
+                    else{
+                        wage=true;
+                    }
+                }
+
+                System.out.print("What is your guess on dice roll? ");
+                int roll=input.nextInt();
+        
+                System.out.println("What is your guess on the coin flip, Heads(H) or Tails(T)? ");
+                String coin=input.next();
+        
+                System.out.println("What is your guess on the spinner, red(r), green(g), blue(b), or yellow(y)? ");
+                String spin=input.next();
+                System.out.println();
+                
+                String co="";
+                String cVal="";
+                if(cCoin==0){
+                    co="T";
+                    cVal="Tails";
+                }
+                else if(cCoin==1){
+                    co="H";
+                    cVal="Heads";
+                }
+                String sp="";
+                String sVal="";
+                if(cSpin==0){
+                sp="b";
+                sVal="Blue";
+                }
+                else if(cSpin==1){
+                sp="r";
+                sVal="Red";
+                }
+                else if(cSpin==2){
+                sp="g";
+                sVal="Green";
+                }
+                else{
+                sp="y";
+                sVal="Yellow";
+                }
+                System.out.println("You rolled a "+cRoll);
+                System.out.println("You flipped "+cVal);
+                System.out.println("You spun a "+sVal);
+        
+                int correctGuesses = 0;
+
+                if (roll == cRoll) {
+                    System.out.println("Your dice roll guess was correct!");
+                    correctGuesses++;
+                } else {
+                    System.out.println("Your dice roll guess was incorrect.");
+                }
+
+                if (coin.equals(co)) {
+                    System.out.println("Your coin flip guess was correct!");
+                    correctGuesses++;
+                } else {
+                    System.out.println("Your coin flip guess was incorrect.");
+                }
+
+                if (spin.equals(sp)) {
+                    System.out.println("Your spinner guess was correct!");
+                    correctGuesses++;
+                } else {
+                    System.out.println("Your spinner guess was incorrect.");
+                }
+                
+                if (correctGuesses == 3) {
+                    System.out.println("\nYou got all guesses correct! You win 3x your bet!");
+                    balance += bet * 3;
+                    System.out.println("You have $"+balance);
+                } else if (correctGuesses == 2) {
+                    System.out.println("\nYou got two guesses correct! You win 2x your bet!");
+                    balance += bet * 2;
+                    System.out.println("You have $"+balance);
+                } else if (correctGuesses == 1) {
+                    if (roll==cRoll){
+                        balance=balance;
+                        System.out.println("You have $"+balance);
+
+                    }
+                    else if (spin==sp){
+                        balance=balance+bet*0.5;
+                        System.out.println("You have $"+balance);
+
+                    }
+                    else if (coin==co){
+                        balance=balance+bet*0.25;
+                        System.out.println("You have $"+balance);
+
+                    }
+                    } else {
+                    System.out.println("\nYou got everything wrong. You lose your bet.");
+                    balance -= bet;
+                    System.out.println("You have $"+balance);
+                }
+
+                System.out.println("You now have $" + balance + " in your bank.");
+            }
+        }
+    }
+}
